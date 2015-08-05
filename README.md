@@ -1,2 +1,2 @@
-# beards-of-zues
+# beards-of-zeus
 By the beards of Zeus
