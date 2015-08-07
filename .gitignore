@@ -31,6 +31,8 @@ node_modules
 *.pfx
 *.cer
 *.csr
+*.crt
+*.pem
 
 # Dev config
 config.js
