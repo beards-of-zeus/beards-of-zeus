@@ -2,9 +2,7 @@
   "name": "Tagalong-Club",
   "version": "0.0.0",
   "homepage": "http://www.tagalong.club",
-  "authors": [
-    "Owen Dismuke <owen.dismuke@gmail.com>"
-  ],
+  "authors": [],
   "description": "Site to gather interested parties on projects",
   "main": "client/index.html",
   "license": "MIT",
