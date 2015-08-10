@@ -4,7 +4,6 @@ var User = require('./user.jsx');
 var Activities = require('./activities.jsx');
 var AdSpace = require('./adspace.jsx');
 var Footer = require('./footer.jsx');
-var Create = require('./createActivity.jsx');
 var ToggleForm = require('./toggleForm.jsx');
 
 module.exports = React.createClass({
