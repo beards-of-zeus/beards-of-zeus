@@ -4,7 +4,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     webpack: {
-      entry: './client/components/main.js',
+      entry: './client/components/boot.jsx',
       output: {
         filename: 'public/js/app.js'
       },
@@ -65,13 +65,22 @@ module.exports = function (grunt) {
 
     watch: {
       scripts: {
+        files: ['**/**/*.js'],
+        tasks: ['jshint'],
+        options: {
+          atBegin: true,
+        }
+      },
+      react: {
         files: [
-          'client/components/main.js'
+          'client/components/**/*.jsx'
         ],
         tasks: [
-          'jshint',
           'webpack'
-        ]
+        ],
+        options: {
+          atBegin: true,
+        }
       },
       css: {
         files: 'public/**/*.css',
