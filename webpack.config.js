@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./client/components/main.js",
+  entry: "./client/components/main.jsx",
   output: {
     filename: "public/js/app.js"
   },
