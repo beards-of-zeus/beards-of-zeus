@@ -9,7 +9,7 @@ module.exports = React.createClass({
             <label>Description: </label><textarea name="description" ></textarea>
             <label>Location: </label><input type="text" name="location" />
             <label>Keywords: </label><input type="text" name="keywords" />
-            <button>Cancel</button> <button>Submit</button>
+            <button>Submit</button>
           </form>
         </div>
       );
