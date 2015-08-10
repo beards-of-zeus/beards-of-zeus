@@ -15,7 +15,7 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div>
-        <button onClick={this.onClick}>Add an Activity</button>
+        <button onClick={this.onClick}>{this.state.showForm ? 'Cancel' : 'Add an Activity'}</button>
         {this.state.showForm ? <Create /> : null}
       </div>
       );
