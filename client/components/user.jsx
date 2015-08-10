@@ -3,7 +3,7 @@ module.exports = React.createClass({
   render: function(){
     return (
         <div className="panel radius">
-            <a href="#"><img className="img-round" src="http://placehold.it/300x300&text=[img]"/></a>
+            <a href="#"><img className="img-round" src="//placehold.it/300x300&text=[img]"/></a>
             <h5><a href="#">Your Name</a></h5>
               <div className="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
               <section className="section">

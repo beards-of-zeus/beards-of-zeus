@@ -1,7 +1,7 @@
 {
   "name": "Tagalong-Club",
   "version": "0.0.0",
-  "homepage": "http://www.tagalong.club",
+  "homepage": "https://www.tagalong.club",
   "authors": [],
   "description": "Site to gather interested parties on projects",
   "main": "client/index.html",
