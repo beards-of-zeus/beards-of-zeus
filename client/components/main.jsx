@@ -5,7 +5,8 @@ var Activities = require('./activities.jsx');
 var AdSpace = require('./adspace.jsx');
 var Footer = require('./footer.jsx');
 
-var Main = React.createClass({
+module.exports = React.createClass({
+  displayName : 'Main',
   render: function(){
     //Need to get data from db here
     var activityArray = [
@@ -39,4 +40,4 @@ var Main = React.createClass({
   }
 });
 
-React.render(<Main />, document.getElementsByTagName('Main')[0]);
+// React.render(<Main />, document.getElementsByTagName('Main')[0]);
