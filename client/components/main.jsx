@@ -27,13 +27,13 @@ module.exports = React.createClass({
           </div>
            
           <div className="large-6 columns">
-            // load add activity here using toggle; 
-            //add and remove class hitting a button
+            {/*load add activity here using toggle; 
+            add and remove class hitting a button*/}
             <Activities activities={activityArray} />
           </div>  
 
           <aside className="large-3 columns hide-for-small">
-          //Placeholder button 
+          {/*Placeholder button */}
             <button>Add an Activity</button>
             <AdSpace />
           </aside>
