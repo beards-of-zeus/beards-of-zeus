@@ -1,8 +1,23 @@
+var Create = require('./createActivity.jsx');
 module.exports = React.createClass({
   displayName: 'ToggleForm',
+  getInitialState: function(){
+    return {
+      showForm: false
+    };
+  },
+  onClick: function(){
+    this.setState({
+      showForm: !this.state.showForm
+    });
+    console.log(this.state.showForm);
+  },
   render: function(){
     return (
-        <button>Add an Activity</button>
+      <div>
+        <button onClick={this.onClick}>Add an Activity</button>
+        {this.state.showForm ? <Create /> : null}
+      </div>
       );
   }
 });
