@@ -29,6 +29,7 @@ module.exports = React.createClass({
           <div className="large-6 columns">
             {/*load add activity here using toggle; 
             add and remove class hitting a button*/}
+            <Create />
             <Activities activities={activityArray} />
           </div>  
 
