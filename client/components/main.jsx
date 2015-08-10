@@ -5,6 +5,7 @@ var Activities = require('./activities.jsx');
 var AdSpace = require('./adspace.jsx');
 var Footer = require('./footer.jsx');
 var Create = require('./createActivity.jsx');
+var ToggleForm = require('./toggleForm.jsx');
 
 module.exports = React.createClass({
   displayName : 'Main',
@@ -35,7 +36,7 @@ module.exports = React.createClass({
 
           <aside className="large-3 columns hide-for-small">
           {/*Placeholder button */}
-            <button>Add an Activity</button>
+            <ToggleForm />
             <AdSpace />
           </aside>
         </div>
