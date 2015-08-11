@@ -23,7 +23,7 @@ var Activity = models.Activity;
 app.post('/data/user', function(req, res) {
   'use strict';
   User.upsert({
-    userId: req.body.user_id.slice(7),
+    userId: req.body.user_id,
     email: req.body.email,
     picture: req.body.picture,
     name: req.body.name,
