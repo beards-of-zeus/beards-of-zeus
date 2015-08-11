@@ -1,11 +1,14 @@
 var app = require('./server/server-config.js');
+var models = require('./server/db/orm-model.js');
 
+var models = models();
+var User = models.User;
+var bodyParser = require('body-parser');
 
-var bodyParser = require('body-parser')
 // parse application/x-www-form-urlencoded 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 
 app.set('port', process.env.PORT || 4568);
@@ -15,9 +18,15 @@ app.listen(app.get('port'));
 var storage = {};
 
 app.post('/', function(req, res) {
-    console.log("[req.body] :", req.body);   // [req.body] : undefined
-
     storage[req.body.user_id] = req.body;
+    console.log(storage);
+    //User.findOrCreate({where: {userId: req.body.user_id.slice(7)})
+    User.upsert({
+      userId: req.body.user_id.slice(7), 
+      email: req.body.email,
+      picture: req.body.picture,
+      name: req.body.name,
+      nickname:req.body.nickname});
     res.sendStatus(200);
 });
 
