@@ -11,34 +11,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/owendismuke/beards-of-zues.git"
+    "url": "git+https://github.com/beards-of-zeus/beards-of-zues.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/owendismuke/beards-of-zues/issues"
+    "url": "https://github.com/beards-of-zeus/beards-of-zues/issues"
   },
   "homepage": "https://www.tagalong.club",
   "dependencies": {
+    "babel-loader": "^5.3.2",
     "express": "^4.13.3",
     "grunt": "^0.4.4",
     "grunt-contrib-concat": "^0.3.0",
     "grunt-contrib-cssmin": "^0.9.0",
     "grunt-contrib-jshint": "^0.11.2",
-    "grunt-contrib-uglify": "^0.4.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-mocha-test": "^0.10.0",
     "grunt-nodemon": "^0.2.1",
     "grunt-shell": "^0.6.4",
     "grunt-webpack": "^1.0.11",
     "mysql": "^2.4.2",
-    "react": "^0.13.3",
-    "sequelize": "~3.4.1",
-    "webpack": "^1.11.0",
-    "babel-core": "^5.8.21",
-    "babel-loader": "^5.3.2"
+    "react": "^0.13.3"
   },
   "devDependencies": {
-    "webpack-dev-server": "^1.10.1"
+    "sequelize": "~3.4.1"
   }
 }
