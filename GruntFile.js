@@ -1,14 +1,25 @@
 module.exports = function (grunt) {
   'use strict';
   var webpack = require('webpack');
-  var webpackcfg = require('./webpack.config.js');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     webpack: {
-      options: webpackcfg,
       build: {
-        plugins: webpackcfg.plugins.concat(
+        entry: './client/components/boot.jsx',
+        output: {
+            filename: 'public/js/app.js',
+        },
+        module: {
+          loaders: [
+            { 
+              jsx: /\.js$/,
+              exclude: /(node_modules|bower_components)/,
+              loader: 'babel-loader'
+            }
+          ],
+        },
+        plugins: [
           new webpack.DefinePlugin({
             'process.env': {
               'NODE_ENV': JSON.stringify('production')
@@ -16,19 +27,11 @@ module.exports = function (grunt) {
           }),
           new webpack.optimize.DedupePlugin(),
           new webpack.optimize.UglifyJsPlugin()
-        )
+        ]
       },
-    },
-    'webpack-dev-server': {
-      options: {
-        webpack: webpackcfg
-      },
-      start: {
-        keepAlive: true,
-        webpack: {
-          devtool: 'eval',
-          debug: true
-        }
+      'build-dev': {
+        devtool: 'sourcemap',
+        debug: true
       }
     },
 
@@ -39,42 +42,42 @@ module.exports = function (grunt) {
     //   }
     // },
 
-      mochaTest: {
-        test: {
-          options: {
-            reporter: 'spec'
-          },
-          src: ['test/**/*.js']
-        }
-      },
-
-      nodemon: {
-        dev: {
-          script: 'server.js'
-        },
-      },
-
-      jshint: {
-        files: [
-          // Add filespec list here
-          '**/**/*.js'
-        ],
+    mochaTest: {
+      test: {
         options: {
-          force: false,
-          jshintrc: '.jshintrc',
-          ignores: [
-            'public/js/app.js',
-            'node_modules/**/*.js'
-          ]
-        }
-      },
+          reporter: 'spec'
+        },
+        src: ['test/**/*.js']
+      }
+    },
 
-      cssmin: {
-        files: {
-          src: 'public/css/app.css',
-          dest: 'public/css/app.min.css'
-        }
+    nodemon: {
+      dev: {
+        script: 'server.js'
       },
+    },
+
+    jshint: {
+      files: [
+        // Add filespec list here
+        '**/**/*.js'
+      ],
+      options: {
+        force: false,
+        jshintrc: '.jshintrc',
+        ignores: [
+          'public/js/app.js',
+          'node_modules/**/*.js'
+        ]
+      }
+    },
+
+    cssmin: {
+      files: {
+        src: 'public/css/app.css',
+        dest: 'public/css/app.min.css'
+      }
+    },
 
     watch: {
       scripts: {
@@ -89,10 +92,11 @@ module.exports = function (grunt) {
           'client/components/**/*.jsx'
         ],
         tasks: [
-          'webpack'
+          'webpack:build-dev'
         ],
         options: {
           atBegin: true,
+          spawn: false
         }
       },
       css: {
@@ -111,7 +115,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-webpack');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.registerTask('server-dev', function () {
     // Running nodejs in a different process and displaying output on the main console
@@ -123,7 +126,7 @@ module.exports = function (grunt) {
     nodemon.stdout.pipe(process.stdout);
     nodemon.stderr.pipe(process.stderr);
 
-    grunt.task.run([ 'webpack-dev-server' ]);
+    grunt.task.run([ 'watch' ]);
   });
   
   ////////////////////////////////////////////////////
@@ -137,7 +140,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'jshint',
     'cssmin',
-    'webpack',
+    'webpack:build',
     // 'uglify'
   ]);
 
