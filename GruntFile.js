@@ -72,7 +72,7 @@ module.exports = function (grunt) {
       cssmin: {
         files: {
           src: 'public/css/app.css',
-          dest: 'public/dist/app.min.css'
+          dest: 'public/css/app.min.css'
         }
       },
 

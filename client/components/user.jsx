@@ -1,5 +1,5 @@
 module.exports = React.createClass({
-  displayName: "User",
+  displayName: 'User',
   render: function(){
     return (
         <div className="panel radius">
