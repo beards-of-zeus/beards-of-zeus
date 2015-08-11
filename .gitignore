@@ -40,3 +40,7 @@ config.js
 # Dev app.js
 public/js/app.*
 public/dist
+
+# Floobits
+.floo
+.flooignore
