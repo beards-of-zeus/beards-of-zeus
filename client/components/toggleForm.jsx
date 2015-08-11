@@ -10,7 +10,6 @@ module.exports = React.createClass({
     this.setState({
       showForm: !this.state.showForm
     });
-    console.log(this.state.showForm);
   },
   render: function(){
     return (
