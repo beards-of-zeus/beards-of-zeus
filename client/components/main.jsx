@@ -23,7 +23,7 @@ module.exports = React.createClass({
        
         <div className="row">
           <div className="large-3 columns ">
-            <User />
+            <User user={this.props.profile} />
           </div>
            
           <div className="large-6 columns">
