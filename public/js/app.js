@@ -44,22 +44,119 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var AUTH0_CLIENT_ID = 'a1Iqj2CYfhvMxrFqzLSWFyaYwmcmjX5m';
-	var AUTH0_DOMAIN = 'marq1006.auth0.com';
+	var AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID || 'Gat2goCXdKhmGCGXYcPzHQ6FhM0tXJwQ';
+	var AUTH0_DOMAIN = process.env.AUTH0_DOMAIN || 'tagalong.auth0.com';
 	var AUTH0_CALLBACK_URL = location.href;
-	var App = __webpack_require__(1);
+	var App = __webpack_require__(2);
 	React.render(React.createElement(App, { clientId: AUTH0_CLIENT_ID, domain: AUTH0_DOMAIN }), document.getElementById('login-page'));
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = setTimeout(cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            currentQueue[queueIndex].run();
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    clearTimeout(timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        setTimeout(drainQueue, 0);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	// TODO(shtylman)
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var LoggedIn = __webpack_require__(2);
-	var Home = __webpack_require__(12);
+	var LoggedIn = __webpack_require__(3);
+	var Home = __webpack_require__(11);
 	module.exports = React.createClass({
 	  displayName: 'App',
 	  componentWillMount: function componentWillMount() {
@@ -104,18 +201,18 @@
 	});
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Main = __webpack_require__(3);
+	var Main = __webpack_require__(4);
 	module.exports = React.createClass({
 	  displayName: 'LoggedIn',
 
 	  logOut: function logOut() {
 	    localStorage.removeItem('userToken');
-	    window.location = 'https://marq1006.auth0.com/v2/logout?returnTo=http://127.0.0.1:4568';
+	    window.location = 'https://tagalong.auth0.com/v2/logout?returnTo=http://localhost:4568';
 	  },
 
 	  getInitialState: function getInitialState() {
@@ -130,6 +227,7 @@
 	        console.log("Error loading the Profile", err);
 	        alert("Error loading the Profile");
 	      }
+	      //POST profile to API /user
 	      this.setState({ profile: profile });
 	    }).bind(this));
 	  },
@@ -168,7 +266,7 @@
 	});
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//For webpack, require react components here
@@ -181,7 +279,6 @@
 	var Footer = __webpack_require__(9);
 	var Create = __webpack_require__(10);
 	var ToggleForm = __webpack_require__(11);
-
 	module.exports = React.createClass({
 	  displayName: 'Main',
 	  render: function render() {
@@ -222,7 +319,7 @@
 	add and remove class hitting a button*/ /*Placeholder button */
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -251,7 +348,7 @@
 	});
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -363,12 +460,12 @@
 	});
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var Activity = __webpack_require__(7);
+	var Activity = __webpack_require__(8);
 
 	module.exports = React.createClass({
 	  displayName: "Activities",
@@ -388,7 +485,7 @@
 	});
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -447,7 +544,7 @@
 	});
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -473,7 +570,7 @@
 	});
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -569,10 +666,15 @@
 	});
 
 /***/ },
-/* 10 */
-/***/ function(module, exports) {
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	// var Nav = require('./home/nav.jsx');
+	'use strict';
+
+	var Banner = __webpack_require__(13);
+	var TestimonialGroup = __webpack_require__(14);
+	var Footer = __webpack_require__(10);
 
 	module.exports = React.createClass({
 	  displayName: 'CreateActivity',
@@ -670,12 +772,145 @@
 
 	  render: function render() {
 	    return React.createElement(
-	      "div",
-	      { className: "login-box auth0-box before" },
+	      'div',
+	      null,
 	      React.createElement(
-	        "a",
-	        { onClick: this.showLock, className: "btn btn-primary btn-lg btn-login btn-block" },
-	        "Sign In"
+	        'div',
+	        { className: 'login-box auth0-box before' },
+	        React.createElement(
+	          'a',
+	          { onClick: this.showLock, className: 'btn btn-primary btn-lg btn-login btn-block' },
+	          'Sign In'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'row' },
+	        React.createElement(
+	          'div',
+	          { className: 'large-12 columns' },
+	          React.createElement(Banner, null),
+	          React.createElement(
+	            'div',
+	            { className: 'row' },
+	            React.createElement(
+	              'div',
+	              { className: 'large-12 columns' },
+	              React.createElement(TestimonialGroup, null)
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement(Footer, null)
+	    );
+	  }
+	});
+
+/***/ },
+/* 12 */,
+/* 13 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = React.createClass({
+	  displayName: 'Banner',
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(
+	        "div",
+	        { className: "row" },
+	        React.createElement(
+	          "div",
+	          { className: "large-12 hide-for-small" },
+	          React.createElement(
+	            "div",
+	            { id: "featured", "data-orbit": true },
+	            React.createElement("img", { src: "//placehold.it/1200x500&text=Slide Image 1", alt: "slide image" })
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        "div",
+	        { className: "row" },
+	        React.createElement(
+	          "div",
+	          { className: "large-12 columns show-for-small" },
+	          React.createElement("img", { src: "//placehold.it/1200x700&text=Mobile Header" })
+	        )
+	      ),
+	      React.createElement("br", null)
+	    );
+	  }
+
+	});
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Testimonial = __webpack_require__(15);
+	module.exports = React.createClass({
+	  displayName: 'TestimonialGroup',
+	  render: function render() {
+	    var testArray = [{ avatar: "//placehold.it/50x50&text=[img]", user: 'Macho Man', quote: 'Oh YEEEEEAH' }, { avatar: "//placehold.it/50x50&text=[img]", user: 'Jon Snow', quote: 'Winter is Coming' }, { avatar: "//placehold.it/50x50&text=[img]", user: 'Austin Powers', quote: 'Yeah Babby Yeah' }, { avatar: "//placehold.it/50x50&text=[img]", user: 'Daryl from Walking Dead', quote: 'Sorry Brother' }];
+	    return React.createElement(
+	      'div',
+	      { className: 'row' },
+	      testArray.map(function (quote) {
+	        return React.createElement(
+	          'div',
+	          { className: 'large-3 small-12 columns', key: quote.user },
+	          React.createElement(Testimonial, { avatar: quote.avatar, name: quote.user, quote: quote.quote })
+	        );
+	      })
+	    );
+	  }
+
+	});
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = React.createClass({
+	  displayName: 'Testimonial',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'div',
+	        { className: 'row person' },
+	        React.createElement(
+	          'div',
+	          { className: 'small-4 columns' },
+	          React.createElement('img', { className: 'img-round', src: this.props.avatar })
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'small-8 columns' },
+	          React.createElement(
+	            'h5',
+	            null,
+	            this.props.name
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'row' },
+	        React.createElement(
+	          'blockquote',
+	          null,
+	          this.props.quote
+	        )
 	      )
 	    );
 	  }

@@ -4,7 +4,7 @@ module.exports = React.createClass({
     
   logOut : function(){
     localStorage.removeItem('userToken');
-    window.location = 'https://marq1006.auth0.com/v2/logout?returnTo=http://127.0.0.1:4568'
+    window.location = 'https://tagalong.auth0.com/v2/logout?returnTo=http://localhost:4568';
   },
 
   getInitialState: function() {
@@ -19,6 +19,7 @@ module.exports = React.createClass({
         console.log("Error loading the Profile", err);
         alert("Error loading the Profile");
       }
+      //POST profile to API /user
       this.setState({profile: profile});
     }.bind(this));
   },
