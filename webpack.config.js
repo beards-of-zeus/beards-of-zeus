@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./client/components/boot.jsx",
+  entry: './client/components/boot.jsx',
   output: {
     filename: 'public/js/app.js'
   },
@@ -11,6 +11,7 @@ module.exports = {
         loader: 'babel'
       }
     ]
-  }
+  },
+  plugins: []
 };
 

@@ -1,67 +1,80 @@
 module.exports = function (grunt) {
   'use strict';
+  var webpack = require('webpack');
+  var webpackcfg = require('./webpack.config.js');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     webpack: {
-      entry: './client/components/boot.jsx',
-      output: {
-        filename: 'public/js/app.js'
-      },
-      module: {
-        loaders: [
-          {
-            test: /\.jsx?$/,
-            exclude: /(node_modules|bower_components)/,
-            loader: 'babel'
-          }
-        ]
-      }
-    },
-
-    uglify: {
-      client: {
-        src: 'public/js/app.js',
-        dest: 'public/dist/app.min.js'
-      }
-    },
-
-    mochaTest: {
-      test: {
-        options: {
-          reporter: 'spec'
-        },
-        src: ['test/**/*.js']
-      }
-    },
-
-    nodemon: {
-      dev: {
-        script: 'server.js'
+      options: webpackcfg,
+      build: {
+        plugins: webpackcfg.plugins.concat(
+          new webpack.DefinePlugin({
+            'process.env': {
+              'NODE_ENV': JSON.stringify('production')
+            }
+          }),
+          new webpack.optimize.DedupePlugin(),
+          new webpack.optimize.UglifyJsPlugin()
+        )
       },
     },
-
-    jshint: {
-      files: [
-        // Add filespec list here
-        '**/**/*.js'
-      ],
+    'webpack-dev-server': {
       options: {
-        force: false,
-        jshintrc: '.jshintrc',
-        ignores: [
-          'public/js/app.js',
-          'node_modules/**/*.js'
-        ]
+        webpack: webpackcfg
+      },
+      start: {
+        keepAlive: true,
+        webpack: {
+          devtool: 'eval',
+          debug: true
+        }
       }
     },
 
-    cssmin: {
-      files: {
-        src: 'public/css/app.css',
-        dest: 'public/dist/app.min.css'
-      }
-    },
+    // uglify: {
+    //   client: {
+    //     src: 'public/js/app.js',
+    //     dest: 'public/dist/app.min.js'
+    //   }
+    // },
+
+      mochaTest: {
+        test: {
+          options: {
+            reporter: 'spec'
+          },
+          src: ['test/**/*.js']
+        }
+      },
+
+      nodemon: {
+        dev: {
+          script: 'server.js'
+        },
+      },
+
+      jshint: {
+        files: [
+          // Add filespec list here
+          '**/**/*.js'
+        ],
+        options: {
+          force: false,
+          jshintrc: '.jshintrc',
+          ignores: [
+            'public/js/app.js',
+            'node_modules/**/*.js'
+          ]
+        }
+      },
+
+      cssmin: {
+        files: {
+          src: 'public/css/app.css',
+          dest: 'public/dist/app.min.css'
+        }
+      },
 
     watch: {
       scripts: {
@@ -88,15 +101,7 @@ module.exports = function (grunt) {
       }
     },
 
-    shell: {
-      prodServer: {
-        command: [
-          'git add .',
-          'git commit -m "Deployment"',
-          'git push azure master'
-        ].join('&&')
-      }
-    },
+    shell: {},
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -118,7 +123,7 @@ module.exports = function (grunt) {
     nodemon.stdout.pipe(process.stdout);
     nodemon.stderr.pipe(process.stderr);
 
-    grunt.task.run([ 'watch' ]);
+    grunt.task.run([ 'webpack-dev' ]);
   });
   
   ////////////////////////////////////////////////////
@@ -133,7 +138,7 @@ module.exports = function (grunt) {
     'jshint',
     'cssmin',
     'webpack',
-    'uglify'
+    // 'uglify'
   ]);
 
   grunt.registerTask('upload', function () {
