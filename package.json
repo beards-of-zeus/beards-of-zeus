@@ -32,9 +32,9 @@
     "grunt-shell": "^0.6.4",
     "grunt-webpack": "^1.0.11",
     "mysql": "^2.4.2",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "sequelize": "~3.4.1"
   },
   "devDependencies": {
-    "sequelize": "~3.4.1"
   }
 }
