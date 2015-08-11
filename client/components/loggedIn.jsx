@@ -2,6 +2,33 @@ var Main = require('./main.jsx');
 module.exports = React.createClass({
   displayName : 'LoggedIn',
 
+  postApi: function() {
+    console.log();
+    $.ajax({
+      url: 'http://localhost:4568/data/user',
+      method: 'POST',
+      data: JSON.stringify(this.state.profile),
+      contentType: "application/json",
+      success: function(){
+      },
+      error:function(){
+      }
+    });
+  },
+
+
+  getApi: function() {
+    $.ajax({
+      url: 'http://localhost:4568/data/user',
+      method: 'GET',
+      contentType: "application/json",
+      success: function(){
+      },
+      error:function(){
+      }
+    });
+  },
+
   getInitialState: function() {
     return {
       profile: null
@@ -21,6 +48,7 @@ module.exports = React.createClass({
 
   render: function() {
     if (this.state.profile) {
+      this.postApi();
       return ( <Main profile={this.state.profile} /> );
     } else {
       return (
