@@ -138,10 +138,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'jshint',
     'cssmin',
     'webpack:build',
-    // 'uglify'
   ]);
 
   grunt.registerTask('upload', function () {
