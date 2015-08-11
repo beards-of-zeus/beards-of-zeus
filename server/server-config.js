@@ -5,4 +5,33 @@ var app = express();
 app.set('view engine', 'html');
 app.use('/', express.static('./public'));
 
+var bodyParser = require('body-parser');
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+
 module.exports = app;
+
+//require sequelize models
+var models = require('./db/orm-model.js');
+var models = models();
+var User = models.User;
+//var Activity = models.Activity;
+
+//Insert or update user information in database
+app.post('/data/user', function(req, res) {
+  'use strict';
+  User.upsert({
+    userId: req.body.user_id.slice(7),
+    email: req.body.email,
+    picture: req.body.picture,
+    name: req.body.name,
+    nickname:req.body.nickname});
+  res.sendStatus(200);
+});
+
+app.get('/data/user', function(req, res){
+  'use strict';
+  res.sendStatus(200);
+});
