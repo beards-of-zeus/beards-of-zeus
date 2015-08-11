@@ -18,8 +18,6 @@ app.listen(app.get('port'));
 var storage = {};
 
 app.post('/', function(req, res) {
-    storage[req.body.user_id] = req.body;
-    console.log(storage);
     //User.findOrCreate({where: {userId: req.body.user_id.slice(7)})
     User.upsert({
       userId: req.body.user_id.slice(7), 
@@ -31,7 +29,6 @@ app.post('/', function(req, res) {
 });
 
 app.get('/', function(req, res){
-  console.log(storage);
   res.sendStatus(200);
 });
 console.log('Server listening on port ', app.get('port'));
