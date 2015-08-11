@@ -14,7 +14,6 @@ module.exports = React.createClass({
     $.ajaxSetup({
       'beforeSend': function(xhr) {
         if (localStorage.getItem('userToken')) {
-          console.log('here');
           xhr.setRequestHeader('Authorization',
                 'Bearer ' + localStorage.getItem('userToken'));
         }
