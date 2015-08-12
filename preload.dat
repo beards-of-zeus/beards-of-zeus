@@ -1,0 +1,16 @@
+insert into Olympus.Users(userId, email, picture, name, nickname, createdAt, updatedAt) values ('github|0000000', 'ronswanson@happy.com', 'https://pbs.twimg.com/profile_images/1369149006/ronProfile_400x400.jpg','Ron Swanson', 'Ron Swanson', 00000, 00000); 
+insert into Olympus.Users(userId, email, picture, name, nickname, createdAt, updatedAt) values ('github|0000001', 'stew@griffin.com', 'http://www.easydrawingtutorials.com/images/StewieGriffin/stewie-step-last.jpg','Stewart Griffin', 'Stew', 00000, 00000); 
+insert into Olympus.Users(userId, email, picture, name, nickname, createdAt, updatedAt) values ('github|0000002', 'ron@channel4.com', 'http://www.trbimg.com/img-528a8599/turbine/la-sh-emerson-college-ron-burgundy-school-comm-001/600/600x423','Ron Burgundy', 'Ron Burgundy?', 00000, 00000); 
+insert into Olympus.Users(userId, email, picture, name, nickname, createdAt, updatedAt) values ('github|0000003', 'fiveFingers@face.com', 'http://www.soulhead.com/wp-content/uploads/2012/03/Rick_James.jpg','Rick James', 'Rick James....', 00000, 00000); 
+
+
+insert into Olympus.Activities(title, description, location, keywords, createdAt, updatedAt) values ('act1','Give a man a fish and feed him for a day. Don’t teach a man to fish…and feed yourself. He’s a grown man. And fishing’s not that hard','Pawnee, Indiana','fish, parks', 00000, 00000);
+insert into Olympus.Activities(title, description, location, keywords, createdAt, updatedAt) values ('act2',"There's always been a lot of tension between Lois and me. And it's not so much that I want to kill her, it's just, I want her not to be alive anymore.",'Quahog','vile, woman', 00000, 00000);
+insert into Olympus.Activities(title, description, location, keywords, createdAt, updatedAt) values ('act3','60% of the time, it works every time....','San Diego','Baxter, cheese', 00000, 00000);
+insert into Olympus.Activities(title, description, location, keywords, createdAt, updatedAt) values ('act4',"It's a celebration!!! Come be Merry!!!",'Hollywood','Rick, James', 00000, 00000);
+
+
+insert into Olympus.UserActivity (createdAt, updatedAt, UserUserId, ActivityId) values (0000, 0000, 'github|0000000', 1); 
+insert into Olympus.UserActivity (createdAt, updatedAt, UserUserId, ActivityId) values (0000, 0000, 'github|0000001', 2); 
+insert into Olympus.UserActivity (createdAt, updatedAt, UserUserId, ActivityId) values (0000, 0000, 'github|0000002', 3); 
+insert into Olympus.UserActivity (createdAt, updatedAt, UserUserId, ActivityId) values (0000, 0000, 'github|0000003', 4); 
