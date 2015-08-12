@@ -61,7 +61,7 @@ app.post('/data/activities', function(req, res){
 
 app.get('/data/activities', function(req, res){
   'use strict';
-
+  var iterations = 0;
   Activity.findAll({})
   .then(function(activities){
     activities.reduce(function(list, activity){ 
@@ -73,10 +73,15 @@ app.get('/data/activities', function(req, res){
         }//where
       })//getUsers
       .then(function(user){
-        list.push({id: activity.id, avatar: user[0].picture, 
-          user: user[0].name, description: activity.description});
-
-        if(list.length === activities.length)
+        if(user.length > 0){
+          console.log('user data', user);
+          list.push({id: activity.id, avatar: user[0].picture, 
+            user: user[0].name, description: activity.description});
+          iterations++;
+        }else{
+          iterations++;
+        }
+        if(iterations === activities.length)
           { res.send(list); }
       }); //then(function(user))
       return list;
