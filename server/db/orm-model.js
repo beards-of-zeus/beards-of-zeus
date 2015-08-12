@@ -1,5 +1,4 @@
 'use strict';
-
 var db = require('./database');
 var Sequelize = require('sequelize');
 
@@ -8,7 +7,8 @@ module.exports = function(){
     userId: {type: Sequelize.STRING, 
       unique: true, 
       notEmpty: true, 
-      notNull: true
+      notNull: true,
+      primaryKey: true
     }, 
     email: Sequelize.STRING,
     picture: Sequelize.STRING,
