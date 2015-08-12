@@ -1,0 +1,3 @@
+Start mysql and ensure Olympus database is created
+Ensure User, Activity, UserActivity tables are created
+Preload local database by running mysql -u root < preload.dat 
