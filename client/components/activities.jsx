@@ -2,10 +2,26 @@ var Activity = require("./activity.jsx");
 
 module.exports = React.createClass({
   displayName: "Activities",
+  componentDidMount: function(){
+    this.getActivities();
+  },
+
+  getInitialState: function(){
+    return {
+      activityList: []
+    }
+  },
+
+  getActivities: function(){
+    $.getJSON('/data/activities', {userID: this.props.user_id}).done(function(activities){
+       this.setState({activityList: activities});
+    }.bind(this));
+  },
+
   render: function() {
     return (
       <div>
-        { this.props.activities.map( function(activity) {
+        { this.state.activityList.map( function(activity) {
             return (
                 <div key={activity.id}>
                   <Activity avatar={activity.avatar}  user={activity.user} description={activity.description} />

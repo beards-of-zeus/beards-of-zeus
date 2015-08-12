@@ -29,7 +29,7 @@ module.exports = React.createClass({
           <div className="large-6 columns">
             {/*load add activity here using toggle; 
             add and remove class hitting a button*/}
-            <Activities activities={activityArray} />
+            <Activities activities={activityArray} user_id={this.props.profile.user_id}/>
           </div>  
 
           <aside className="large-3 columns hide-for-small">

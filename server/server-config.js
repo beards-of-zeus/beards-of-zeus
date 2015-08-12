@@ -61,8 +61,25 @@ app.post('/data/activities', function(req, res){
 
 app.get('/data/activities', function(req, res){
   'use strict';
+
   Activity.findAll({})
-  .then(function(err, data){
-    res.send(200, data);
-  });
-});
+  .then(function(activities){
+    activities.reduce(function(list, activity){ 
+      activity.getUsers({
+        where : {
+          userId : {
+            ne : req.query.userID
+          }//userId
+        }//where
+      })//getUsers
+      .then(function(user){
+        list.push({id: activity.id, avatar: user[0].picture, 
+          user: user[0].name, description: activity.description});
+
+        if(list.length === activities.length)
+          { res.send(list); }
+      }); //then(function(user))
+      return list;
+    }, []); //reduce
+  });//then(function(activities))
+});//app.get
