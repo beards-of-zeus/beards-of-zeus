@@ -5,7 +5,7 @@ var Sequelize = require('sequelize');
 module.exports = function(){
   //create user table
   var User = db.define('Users', {
-    userId: {type: Sequelize.STRING, 
+      userId: {type: Sequelize.STRING, 
       unique: true, 
       notEmpty: true, 
       notNull: true,
