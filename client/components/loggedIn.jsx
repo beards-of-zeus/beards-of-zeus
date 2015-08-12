@@ -3,7 +3,7 @@ module.exports = React.createClass({
   displayName : 'LoggedIn',
 
   postApi: function() {
-    $.post('/data/user', JSON.stringify(this.state.profile));
+    $.post('/data/user', this.state.profile);
   },
 
 
