@@ -38,11 +38,23 @@ app.get('/data/user', function(req, res){
 
 app.post('/data/activities', function(req, res){
   'use strict';
-  Activity.create({
-    title: req.body.title,
-    description: req.body.description,
-    location: req.body.location,
-    keywords: req.body.keywords
+  User.find({
+    where: {
+      userId : req.body.user_id
+    }
+  })
+  .then(function(user){
+    Activity.build({
+      title: req.body.title,
+      description: req.body.description,
+      location: req.body.location,
+      keywords: req.body.keywords
+    })
+    .save()
+    .then(function(activity){
+      if(user)
+        user.addActivity(activity);
+    });
   });
   res.redirect('/');
 });

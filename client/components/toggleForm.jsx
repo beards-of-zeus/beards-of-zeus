@@ -15,7 +15,7 @@ module.exports = React.createClass({
     return (
       <div>
         <button onClick={this.onClick}>{this.state.showForm ? 'Cancel' : 'Add an Activity'}</button>
-        {this.state.showForm ? <Create /> : null}
+        {this.state.showForm ? <Create user_id={this.props.user_id}/> : null}
       </div>
       );
   }

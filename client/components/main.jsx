@@ -34,7 +34,7 @@ module.exports = React.createClass({
 
           <aside className="large-3 columns hide-for-small">
           {/*Placeholder button */}
-            <ToggleForm />
+            <ToggleForm user_id={this.props.profile.user_id} />
             <AdSpace />
           </aside>
         </div>
