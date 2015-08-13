@@ -48,13 +48,10 @@ app.post('/data/activities', function(req, res){
       title: req.body.title,
       description: req.body.description,
       location: req.body.location,
-      keywords: req.body.keywords
+      keywords: req.body.keywords,
+      ownerId: req.body.user_id
     })
-    .save()
-    .then(function(activity){
-      if(user)
-        user.addActivity(activity);
-    });
+    .save();
   });
   res.redirect('/');
 });
@@ -62,29 +59,42 @@ app.post('/data/activities', function(req, res){
 app.get('/data/activities', function(req, res){
   'use strict';
   var iterations = 0;
-  Activity.findAll({})
-  .then(function(activities){
-    activities.reduce(function(list, activity){ 
-      activity.getUsers({
-        where : {
-          userId : {
-            ne : req.query.userID
-          }//userId
-        }//where
-      })//getUsers
-      .then(function(user){
-        if(user.length > 0){
-          list.push({id: activity.id, avatar: user[0].picture, 
-            user: user[0].name, description: activity.description, title: activity.title,
+  //query for all activities for which the user is NOT an owner
+  Activity.findAll({
+    where:{
+      ownerIdUserId: {
+        ne : req.query.userID
+      }
+    }
+  }).then(function(activities){
+    //add each activity to a list
+    activities.reduce(function(list, activity){
+      //access the activity owner's information
+      User.find({where: {userId: activity.ownerIdUserId}})
+        .then(function(user){
+          //push activity information to list
+          list.push({id: activity.id, avatar: user.picture, 
+            owner: user.name, description: activity.description, title: activity.title,
             keywords: activity.keywords, location: activity.location});
           iterations++;
-        }else{
-          iterations++;
-        }
-        if(iterations === activities.length)
-          { res.send(list); }
-      }); //then(function(user))
+          //once all activities have been added, send as response
+          if(iterations === activities.length)
+            { res.send(list); }
+          });//function(user)
       return list;
-    }, []); //reduce
-  });//then(function(activities))
+    }, []);//reduce
+  });//function(activities)
 });//app.get
+
+app.post('/data/join', function(req, res){
+  'use strict';
+  console.log('ZZZZZZZZZZZZZ@@@@@', req.body);
+  User.find({where: {userId: req.body.user_id}})
+    .then(function(user){
+      Activity.find({where: {id: req.body.activity_id}})
+      .then(function(activity){
+        user.addActivity(activity);
+      });
+    });
+  res.redirect('/');
+});

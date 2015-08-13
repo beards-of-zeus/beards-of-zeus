@@ -44,7 +44,8 @@ module.exports = function(){
   Activity.belongsToMany(User, {through: 'UserActivity'});
   User.belongsToMany(Activity, {through: 'UserActivity'});
 
-  Activity.hasOne(User, {as:'Owner'});
+  Activity.belongsTo(User, {as:'ownerId'});
+
   // User.sync().success(function () {
   //   console.log('User table created!');
   // });

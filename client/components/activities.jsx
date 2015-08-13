@@ -19,13 +19,14 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var that = this;
     return (
       <div>
         { this.state.activityList.map( function(activity) {
             return (
                 <div key={activity.id}>
-                  <Activity avatar={activity.avatar}  user={activity.user} description={activity.description} title={activity.title} 
-                  location={activity.location} keywords={activity.keywords}/>
+                  <Activity user_id={that.props.user_id} avatar={activity.avatar}  owner={activity.owner} description={activity.description} title={activity.title} 
+                  location={activity.location} keywords={activity.keywords} id={activity.id} />
                 </div>
               )
           })
