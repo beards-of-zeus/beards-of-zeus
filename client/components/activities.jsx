@@ -24,7 +24,8 @@ module.exports = React.createClass({
         { this.state.activityList.map( function(activity) {
             return (
                 <div key={activity.id}>
-                  <Activity avatar={activity.avatar}  user={activity.user} description={activity.description} />
+                  <Activity avatar={activity.avatar}  user={activity.user} description={activity.description} title={activity.title} 
+                  location={activity.location} keywords={activity.keywords}/>
                 </div>
               )
           })
