@@ -40,7 +40,6 @@ module.exports = React.createClass({
     } else {
       return (
         <div className="logged-in-box auth0-box logged-in">
-          <h1 id="logo"><img src="https://cdn.auth0.com/blog/auth0_logo_final_blue_RGB.png" /></h1>
         </div>);
     }
   }
