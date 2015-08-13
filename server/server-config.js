@@ -74,7 +74,6 @@ app.get('/data/activities', function(req, res){
       })//getUsers
       .then(function(user){
         if(user.length > 0){
-          console.log('user data', user);
           list.push({id: activity.id, avatar: user[0].picture, 
             user: user[0].name, description: activity.description});
           iterations++;
