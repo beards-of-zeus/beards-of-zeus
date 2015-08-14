@@ -4,11 +4,10 @@ module.exports = React.createClass({
   render: function() {
     return (
         <div className="row">
-          <div className="large-2 columns small-3"><img className="img-round" src={this.props.avatar} /></div>
-          <div className="large-10 columns panel radius">
-            <p><strong>{this.props.title}</strong></p>
-            <p><em>{this.props.location}</em></p> <p className="keywords">{this.props.keywords}</p>
-            <p>{this.props.description}</p>
+          <div className="small-12 columns panel radius user-details">
+            <p className="user-description">{this.props.description}</p>
+            <p className="user-location">{this.props.location}</p> 
+            <p className="user-keywords">{this.props.keywords}</p>
           </div>
         </div>
       )

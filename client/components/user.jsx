@@ -1,6 +1,7 @@
+var OwnedActivities = require('./ownedActivities.jsx');
 var OpenActivities = require('./participatingActivities.jsx');
 var ClosedActivities = require('./closedActivities.jsx');
-var ToggleUserActivity = require('./toggleUserActivity.jsx')
+var ToggleUserActivity = require('./toggleUserActivity.jsx');
 
 module.exports = React.createClass({
   displayName: 'User',
@@ -29,25 +30,10 @@ module.exports = React.createClass({
     var that = this;
     return (
         <div className="panel radius">
-            <a href="#"><img className="img-round" src={this.props.user.picture} /></a>
-            <h5><a href="#">{this.props.user.name}</a></h5>
+            <h3 className="user-name"><a href="#">{this.props.user.name}</a></h3>
+            <a href="#"><img className="img-round user-img" src={this.props.user.picture} /></a>
             <div className="section-container vertical-nav owned-activities" data-section data-options="deep_linking: false; one_up: true">
-              <h6> Owned Activities </h6>
-              <p> Deactivate </p>
-              { this.state.activityList.map( function(activity) {
-                  return (
-                    <div key={activity.id}>
-                      <section className="section">
-                      <h5 className="title">
-                      <input type='checkbox' onChange={that.toggle.bind(null, activity.id)}/>
-                      <ToggleUserActivity avatar={activity.avatar}  owner={activity.owner} description={activity.description}
-                        location={activity.location} keywords={activity.keywords}  title={activity.title}></ToggleUserActivity>
-                      </h5>
-                      </section>
-                    </div>
-                  )
-                })
-              }
+              <OwnedActivities user_id={this.props.user.user_id}/> 
               <OpenActivities user_id={this.props.user.user_id}/>
               <ClosedActivities user_id={this.props.user.user_id}/>
             </div>

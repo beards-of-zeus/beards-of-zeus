@@ -12,8 +12,11 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-        <div className="login-box auth0-box before">
-          <a onClick={this.showLock} className="btn btn-primary btn-lg btn-login btn-block">Sign In</a>
+        <div className="login-box auth0-box before row">
+          <div className="column large-10"></div>
+          <div className="column large-2">
+            <a onClick={this.showLock} className="button radius right btn-login">Sign In</a>
+          </div>
         </div>
         <div className="row">
           <div className="large-12 columns">

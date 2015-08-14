@@ -14,18 +14,15 @@ module.exports = React.createClass({
         <Nav />
        
         <div className="row">
-          <div className="large-3 columns ">
+          <div className="large-4 columns ">
             <User user={this.props.profile} />
           </div>
            
-          <div className="large-6 columns">
-            {/*load add activity here using toggle; 
-            add and remove class hitting a button*/}
+          <div className="large-5 columns">
             <Activities user_id={this.props.profile.user_id}/>
           </div>  
 
           <aside className="large-3 columns hide-for-small">
-          {/*Placeholder button */}
             <ToggleForm user_id={this.props.profile.user_id} />
             <AdSpace />
           </aside>

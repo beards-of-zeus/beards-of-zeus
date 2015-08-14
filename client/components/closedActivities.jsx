@@ -1,3 +1,5 @@
+var ToggleUserActivity = require('./toggleUserActivity.jsx');
+
 module.exports = React.createClass({
   displayName: 'ClosedActivities',
 
@@ -20,21 +22,20 @@ module.exports = React.createClass({
   render: function(){
     var that = this;
     return (
-        <div className="panel radius">
-          <div className="section-container vertical-nav owned-activities" data-section data-options="deep_linking: false; one_up: true">
-            <h6> Closed Activities </h6>
-            { this.state.activityList.map( function(activity) {
-                return (
-                  <div key={activity.id}>
-                    <section className="section">
-                      <h5 className="title"><a href="#">{activity.title}</a></h5>
-                    </section>
-                  </div>
-                )
-              })
-            }
-          </div>
+      <div className="panel callout radius">
+        <div className="row">
+          <h5 className="small-12 column"> Closed Activities </h5>
         </div>
-      )
+        { this.state.activityList.map( function(activity) {
+            return (
+              <div className="row" key={activity.id}>
+                <ToggleUserActivity avatar={activity.avatar}  owner={activity.owner} description={activity.description}
+            location={activity.location} keywords={activity.keywords}  title={activity.title}/>
+              </div>
+            )
+          })
+        }
+      </div>
+    );
   }
 });

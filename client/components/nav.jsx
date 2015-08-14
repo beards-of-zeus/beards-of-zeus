@@ -8,7 +8,7 @@ module.exports = React.createClass({
         <div className="row">
           <div className="large-12 columns">
             <div className="panel radius">
-              <h1>TagAlong.Club <a href='/' onClick={this.logOut} className="button radius right">Log Out</a></h1>
+              <h1>TagAlong.Club <a href='/' onClick={this.logOut} className="button tiny radius right">Log Out</a></h1>
             </div>
           </div>
         </div>
