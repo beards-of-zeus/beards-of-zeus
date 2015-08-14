@@ -1,6 +1,6 @@
 
 module.exports = React.createClass({
-  displayName: "Activity",
+  displayName: "UserActivity",
   render: function() {
     return (
         <div className="row">

@@ -1,5 +1,6 @@
 var OpenActivities = require('./participatingActivities.jsx');
 var ClosedActivities = require('./closedActivities.jsx');
+var ToggleUserActivity = require('./toggleUserActivity.jsx')
 
 module.exports = React.createClass({
   displayName: 'User',
@@ -38,8 +39,11 @@ module.exports = React.createClass({
                   return (
                     <div key={activity.id}>
                       <section className="section">
-                      <h5 className="title"><a href="#">{activity.title}</a>
-                      <input type='checkbox' onChange={that.toggle.bind(null, activity.id)}/></h5>
+                      <h5 className="title">
+                      <input type='checkbox' onChange={that.toggle.bind(null, activity.id)}/>
+                      <ToggleUserActivity avatar={activity.avatar}  owner={activity.owner} description={activity.description}
+                        location={activity.location} keywords={activity.keywords}  title={activity.title}></ToggleUserActivity>
+                      </h5>
                       </section>
                     </div>
                   )
