@@ -162,6 +162,5 @@ app.post('/data/toggle', function(req, res){
   .then(function(activity){
     activity.updateAttributes({active: !activity.get('active')});
   });
-  console.log('fjdsal;fjsdalfjdslfjdlsfjldsfjl;dsfjld;sjf;dsjf;ldsjl;fdjsl;fjdsl;jfl;dsfj;s');
-  res.redirect('/');
+  res.sendStatus(200);
 });
