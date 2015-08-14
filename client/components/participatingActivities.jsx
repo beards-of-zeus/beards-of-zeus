@@ -1,3 +1,5 @@
+var ToggleUserActivity = require('./toggleUserActivity.jsx');
+
 module.exports = React.createClass({
   displayName: 'OpenActivities',
 
@@ -20,21 +22,25 @@ module.exports = React.createClass({
   render: function(){
     var that = this;
     return (
-        <div className="panel radius">
-          <div className="section-container vertical-nav owned-activities" data-section data-options="deep_linking: false; one_up: true">
-            <h6> Participating Activities </h6>
-            { this.state.activityList.map( function(activity) {
-                return (
-                  <div key={activity.id}>
-                    <section className="section">
-                      <h5 className="title"><a href="#">{activity.title}</a></h5>
-                    </section>
-                  </div>
-                )
-              })
-            }
-          </div>
-          </div>
-      )
+      <div className="panel callout radius">
+        <div className="row">
+          <h5 className="small-12 column"> Participating Activities </h5>
+        </div>
+        { this.state.activityList.map( function(activity) {
+            return (
+              <div className="row" key={activity.id}>
+                <ToggleUserActivity avatar={activity.avatar}  owner={activity.owner} description={activity.description}
+            location={activity.location} keywords={activity.keywords}  title={activity.title}/>
+                <form action="/data/leave" method="post" className="small-2 columns leave">
+                  <input type='hidden' name='activity_id' value={activity.id}/>
+                  <input type='hidden' name='user_id' value={that.props.user_id}/>
+                  <button type="submit"><i className="fa fa-minus"></i></button>
+              </form> 
+              </div>
+            )
+          })
+        }
+      </div>
+    );
   }
 });

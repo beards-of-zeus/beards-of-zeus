@@ -13,8 +13,8 @@ module.exports = React.createClass({
   },
   render: function(){
     return (
-      <div>
-        <button onClick={this.onClick}>{this.state.showForm ? 'Hide' : 'More Details'}</button>
+      <div className="description">
+        <p className="show-more activity-details" onClick={this.onClick}>{this.state.showForm ? 'Hide Details' : 'Show Details'}</p>
         {this.state.showForm ? <Description description={this.props.description}/> : null}
       </div>
       );

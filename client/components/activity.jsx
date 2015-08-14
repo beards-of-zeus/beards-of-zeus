@@ -5,23 +5,21 @@ module.exports = React.createClass({
   render: function() {
     return (
         <div className="row">
-          <div className="large-2 columns small-3"><img className="img-round" src={this.props.avatar} /></div>
-          <div className="large-10 columns panel radius">
-            <p><strong>{this.props.title}</strong></p>
-            <p><em>{this.props.location}</em></p> <p className="keywords">{this.props.keywords}</p>
-            <ul className="inline-list">
-              <ToggleDescription description={this.props.description} />
-              <form action="/data/join" method="post">
+          <div className="large-12 columns panel activity radius">
+            <div className="row">
+              <div className="small-2 columns"><img className="img-round owner" src={this.props.avatar} /></div>
+              <h3 className="small-8 columns activity-title">{this.props.title}</h3>
+              <form className="small-1 columns join" action="/data/join" method="post">
                 <input type='hidden' name='user_id' value={this.props.user_id}/>
                 <input type='hidden' name='activity_id' value={this.props.id}/>
-                <button type="submit">Join Activity</button>
-              </form>
-              <form action="/data/leave" method="post">
-                <input type='hidden' name='user_id' value={this.props.user_id}/>
-                <input type='hidden' name='activity_id' value={this.props.id}/>
-                <button type="submit">Leave Activity</button>
-              </form>              
-            </ul>
+                <button type="submit"><i className="fa fa-plus"></i></button>
+              </form>             
+            </div>
+            <ToggleDescription description={this.props.description} />
+            <div className="row activity-info">
+              <p className="small-6 column location">{this.props.location}</p>
+              <p className="small-6 column keywords">{this.props.keywords}</p>
+            </div>
           </div>
         </div>
       )
