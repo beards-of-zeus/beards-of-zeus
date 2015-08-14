@@ -16,7 +16,8 @@ module.exports = React.createClass({
     this.props.lock.getProfile(this.props.idToken, function (err, profile) {
       if (err) {
         console.log("Error loading the Profile", err);
-        alert("Error loading the Profile");
+        localStorage.removeItem('userToken');
+        window.location = window.location.hostname;
       }
       {/*POST profile to API /user*/}
       this.setState({profile: profile});
