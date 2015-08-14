@@ -16,6 +16,11 @@ module.exports = React.createClass({
                 <input type='hidden' name='activity_id' value={this.props.id}/>
                 <button type="submit">Join Activity</button>
               </form>
+              <form action="/data/leave" method="post">
+                <input type='hidden' name='user_id' value={this.props.user_id}/>
+                <input type='hidden' name='activity_id' value={this.props.id}/>
+                <button type="submit">Leave Activity</button>
+              </form>              
             </ul>
           </div>
         </div>

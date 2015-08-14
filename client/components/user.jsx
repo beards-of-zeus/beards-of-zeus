@@ -11,7 +11,7 @@ module.exports = React.createClass({
 
   getInitialState: function(){
     return {
-      activityList: [],
+      activityList: []
     }
   },
 
