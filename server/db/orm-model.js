@@ -46,13 +46,6 @@ module.exports = function(){
 
   Activity.belongsTo(User, {as:'ownerId'});
 
-  // User.sync().success(function () {
-  //   console.log('User table created!');
-  // });
-  // Activity.sync().success(function () {
-  //   console.log('Activity table created!');
-  // });
-
   db.sync();
   return {User:User, Activity: Activity};
 };

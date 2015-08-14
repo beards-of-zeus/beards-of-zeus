@@ -38,21 +38,15 @@ app.get('/data/user', function(req, res){
 
 app.post('/data/activities', function(req, res){
   'use strict';
-  User.find({
-    where: {
-      userId : req.body.user_id
-    }
-  })
-  .then(function(user){
     Activity.build({
       title: req.body.title,
       description: req.body.description,
       location: req.body.location,
       keywords: req.body.keywords,
-      ownerId: req.body.user_id
+      ownerIdUserId: req.body.user_id,
+      active: true
     })
     .save();
-  });
   res.redirect('/');
 });
 
@@ -64,7 +58,8 @@ app.get('/data/activities', function(req, res){
     where:{
       ownerIdUserId: {
         ne : req.query.userID
-      }
+      }, 
+      active: true
     }
   }).then(function(activities){
     //add each activity to a list
@@ -88,7 +83,6 @@ app.get('/data/activities', function(req, res){
 
 app.post('/data/join', function(req, res){
   'use strict';
-  console.log('ZZZZZZZZZZZZZ@@@@@', req.body);
   User.find({where: {userId: req.body.user_id}})
     .then(function(user){
       Activity.find({where: {id: req.body.activity_id}})
@@ -97,4 +91,48 @@ app.post('/data/join', function(req, res){
       });
     });
   res.redirect('/');
+});
+
+//tell the difference between owner vs. just belonging to activity;
+//also show activity if owner in side-bar
+
+
+
+
+app.get('/data/userActivities', function(req, res){
+  'use strict';
+  Activity.findAll({
+    where: {
+      ownerIdUserId : req.query.userID
+    }
+  }).then(function(ownedActivities){
+    
+    res.send(ownedActivities);
+  });
+});//app.get
+
+app.get('/data/participatingActivities', function(req, res){
+  'use strict';
+  User.find({
+    where: { 
+      userId: req.query.userID
+    }
+  }).then(function(user){
+    user.getActivities()
+    .then(function(activities){
+      res.send(activities);
+    });
+  });
+});//app.get
+app.post('/data/toggle', function(req, res){
+  'use strict';
+  Activity.find({
+    where: {
+      id: req.body.activityId
+    }
+  })
+  .then(function(activity){
+    activity.updateAttributes({active: !activity.get('active')});
+  });
+  res.sendStatus(200);
 });
