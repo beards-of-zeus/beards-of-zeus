@@ -1,4 +1,5 @@
-var Participants = require('./participatingActivities.jsx');
+var OpenActivities = require('./participatingActivities.jsx');
+var ClosedActivities = require('./closedActivities.jsx');
 
 module.exports = React.createClass({
   displayName: 'User',
@@ -20,7 +21,6 @@ module.exports = React.createClass({
   },
 
   toggle: function(activityId){
-    console.log(activityId);
     $.post('/data/toggle', {activityId: activityId});
   },
 
@@ -44,7 +44,8 @@ module.exports = React.createClass({
                   )
                 })
               }
-              <Participants user_id={this.props.user.user_id}/>
+              <OpenActivities user_id={this.props.user.user_id}/>
+              <ClosedActivities user_id={this.props.user.user_id}/>
             </div>
           </div>
       )

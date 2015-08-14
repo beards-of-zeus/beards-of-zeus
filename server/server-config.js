@@ -103,7 +103,7 @@ app.get('/data/userActivities', function(req, res){
   'use strict';
   Activity.findAll({
     where: {
-      ownerIdUserId : req.query.userID
+      ownerIdUserId : req.query.userID,
     }
   }).then(function(ownedActivities){
     
@@ -118,12 +118,29 @@ app.get('/data/participatingActivities', function(req, res){
       userId: req.query.userID
     }
   }).then(function(user){
-    user.getActivities()
+    user.getActivities({
+      where : {
+        active : true
+      }
+    })
     .then(function(activities){
       res.send(activities);
     });
   });
 });//app.get
+
+app.get('/data/closedActivities', function(req, res){
+   'use strict';
+  Activity.findAll({
+    where: {
+      ownerIdUserId : req.query.userID,
+      active : false
+    }
+  }).then(function(ownedActivities){
+    res.send(ownedActivities);
+  });
+});//app.get
+
 app.post('/data/toggle', function(req, res){
   'use strict';
   Activity.find({

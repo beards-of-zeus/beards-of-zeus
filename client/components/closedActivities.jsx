@@ -1,5 +1,5 @@
 module.exports = React.createClass({
-  displayName: 'OpenActivities',
+  displayName: 'ClosedActivities',
 
   componentDidMount: function(){
     this.getActivities();
@@ -12,7 +12,7 @@ module.exports = React.createClass({
   },
 
   getActivities: function(){
-    $.getJSON('/data/participatingActivities', {userID: this.props.user_id}).done(function(activities){
+    $.getJSON('/data/closedActivities', {userID: this.props.user_id}).done(function(activities){
        this.setState({activityList: activities});
     }.bind(this));
   },
@@ -22,7 +22,7 @@ module.exports = React.createClass({
     return (
         <div className="panel radius">
           <div className="section-container vertical-nav owned-activities" data-section data-options="deep_linking: false; one_up: true">
-            <h6> Participating Activities </h6>
+            <h6> Closed Activities </h6>
             { this.state.activityList.map( function(activity) {
                 return (
                   <div key={activity.id}>
@@ -34,7 +34,7 @@ module.exports = React.createClass({
               })
             }
           </div>
-          </div>
+        </div>
       )
   }
 });
