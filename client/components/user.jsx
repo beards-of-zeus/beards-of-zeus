@@ -22,7 +22,6 @@ module.exports = React.createClass({
   },
 
   toggle: function(activityId){
-    console.log(this.state.activityList);
     $.post('/data/toggle', {activityId: activityId});
   },
 
