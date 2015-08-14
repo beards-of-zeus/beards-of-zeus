@@ -5,7 +5,7 @@ module.exports = React.createClass({
   componentWillMount: function() {
     this.setupAjax();
     this.createLock();
-    this.setState({idToken: this.getIdToken()})
+    this.setState({idToken: this.getIdToken()});
   },
   createLock: function() {
     this.lock = new Auth0Lock(this.props.clientId, this.props.domain);
