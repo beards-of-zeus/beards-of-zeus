@@ -93,6 +93,17 @@ app.post('/data/join', function(req, res){
   res.redirect('/');
 });
 
+app.post('/data/leave', function(req, res){
+  'use strict';
+  User.find({where: {userId: req.body.user_id}})
+    .then(function(user){
+      Activity.find({where: {id: req.body.activity_id}})
+      .then(function(activity){
+        user.removeActivity(activity);
+      });
+    });
+  res.redirect('/');
+});
 //tell the difference between owner vs. just belonging to activity;
 //also show activity if owner in side-bar
 
@@ -151,5 +162,6 @@ app.post('/data/toggle', function(req, res){
   .then(function(activity){
     activity.updateAttributes({active: !activity.get('active')});
   });
-  res.sendStatus(200);
+  console.log('fjdsal;fjsdalfjdslfjdlsfjldsfjl;dsfjld;sjf;dsjf;ldsjl;fdjsl;fjdsl;jfl;dsfj;s');
+  res.redirect('/');
 });
