@@ -54,11 +54,11 @@ app.get('/data/activities', function(req, res){
   'use strict';
 
   //query for all activities for which the user is NOT an owner
-  sequelize.query("select id, description, title, keywords, location, " + 
-    "(select picture from Users user where userId = activity.ownerIdUserId) " + 
-     "as avatar, (select name from Users user where userId = " +
-      "activity.ownerIdUserId) as owner from Activities activity " + 
-    "where ownerIdUserId != '" + req.query.userID + "' and active = true", 
+  sequelize.query("select id, description, title, keywords, location, " +
+    "(select picture from Users user where userId = activity.ownerIdUserId) " +
+    "as avatar, (select name from Users user where userId = " +
+    "activity.ownerIdUserId) as owner from Activities activity " +
+    "where ownerIdUserId != '" + req.query.userID + "'",
     { type: sequelize.QueryTypes.SELECT}).then(function(results){
       res.send(results);
   });
