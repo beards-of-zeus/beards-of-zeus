@@ -6,7 +6,7 @@ module.exports = React.createClass({
         <div className="row">
           <div className="large-12 hide-for-small">
             <div id="featured" data-orbit>
-              <img src="//placehold.it/1200x500&text=Slide Image 1" alt="slide image"/>
+              <img src="http://bit.ly/1LcTUGp" alt="slide image"/>
             </div>
           </div>
         </div>

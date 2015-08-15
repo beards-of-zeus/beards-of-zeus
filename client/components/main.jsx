@@ -22,7 +22,7 @@ module.exports = React.createClass({
             <Activities user_id={this.props.profile.user_id}/>
           </div>  
 
-          <aside className="large-3 columns hide-for-small">
+          <aside className="large-3 columns">
             <ToggleForm user_id={this.props.profile.user_id} />
             <AdSpace />
           </aside>
