@@ -27,7 +27,6 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    var that = this;
     return (
         <div className="panel radius">
             <h3 className="user-name"><a href="#">{this.props.user.name}</a></h3>
