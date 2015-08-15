@@ -1,5 +1,5 @@
 var OwnedActivities = require('./ownedActivities.jsx');
-var OpenActivities = require('./participatingActivities.jsx');
+var ParticipatingActivities = require('./participatingActivities.jsx');
 var ClosedActivities = require('./closedActivities.jsx');
 var ToggleUserActivity = require('./toggleUserActivity.jsx');
 
@@ -34,7 +34,7 @@ module.exports = React.createClass({
             <a href="#"><img className="img-round user-img" src={this.props.user.picture} /></a>
             <div className="section-container vertical-nav owned-activities" data-section data-options="deep_linking: false; one_up: true">
               <OwnedActivities user_id={this.props.user.user_id}/> 
-              <OpenActivities user_id={this.props.user.user_id}/>
+              <ParticipatingActivities user_id={this.props.user.user_id}/>
               <ClosedActivities user_id={this.props.user.user_id}/>
             </div>
           </div>
