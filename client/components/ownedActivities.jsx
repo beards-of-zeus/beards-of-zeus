@@ -24,23 +24,26 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    var that = this;
+  var that = this;
     return (
       <div className="panel callout radius">
         <div className="row">
-          <h5 className="small-8 column"> Owned Activities </h5>
-          <p className="small-4 column"> Close? </p>
+          <h5 className="small-12 column"> Owned Activities </h5>
         </div>
         { this.state.activityList.map( function(activity) {
-          return (
-            <div className="row" key={activity.id}>
-              <ToggleUserActivity avatar={activity.avatar}  owner={activity.owner} description={activity.description}
-                location={activity.location} keywords={activity.keywords}  title={activity.title}/>
-              <input className="small-2 column" type='checkbox' onChange={that.toggle.bind(null, activity.id)}/>
-            </div>
-          )
-        })
-      }
+            return (
+              <div className="row" key={activity.id}>
+                <ToggleUserActivity avatar={activity.avatar}  owner={activity.owner} description={activity.description}
+            location={activity.location} keywords={activity.keywords}  title={activity.title}/>
+                <form action="/data/toggle" method="post" className="small-2 columns leave">
+                  <input type='hidden' name='activity_id' value={activity.id}/>
+                  <input type='hidden' name='user_id' value={that.props.user_id}/>
+                  <button type="submit"><i className="fa fa-minus"></i></button>
+              </form> 
+              </div>
+            )
+          })
+        }
       </div>
     );
   }

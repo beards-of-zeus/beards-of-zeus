@@ -1,5 +1,5 @@
 var express = require('express');
-
+var sequelize = require('./db/database.js');
 var app = express();
 
 app.set('view engine', 'html');
@@ -52,33 +52,18 @@ app.post('/data/activities', function(req, res){
 
 app.get('/data/activities', function(req, res){
   'use strict';
-  var iterations = 0;
+
   //query for all activities for which the user is NOT an owner
-  Activity.findAll({
-    where:{
-      ownerIdUserId: {
-        ne : req.query.userID
-      }, 
-      active: true
-    }
-  }).then(function(activities){
-    //add each activity to a list
-    activities.reduce(function(list, activity){
-      //access the activity owner's information
-      User.find({where: {userId: activity.ownerIdUserId}})
-        .then(function(user){
-          //push activity information to list
-          list.push({id: activity.id, avatar: user.picture, 
-            owner: user.name, description: activity.description, title: activity.title,
-            keywords: activity.keywords, location: activity.location});
-          iterations++;
-          //once all activities have been added, send as response
-          if(iterations === activities.length)
-            { res.send(list); }
-          });//function(user)
-      return list;
-    }, []);//reduce
-  });//function(activities)
+
+  sequelize.query("select id, description, title, keywords, location, " + 
+    "(select picture from Olympus.Users user where userId = activity.ownerIdUserId) " + 
+     "as avatar, (select name from Olympus.Users user where userId = " +
+      "activity.ownerIdUserId) as owner from Olympus.Activities activity " + 
+    "where ownerIdUserId != '" + req.query.userID + "'", 
+    { type: sequelize.QueryTypes.SELECT}).then(function(results){
+      res.send(results);
+  });
+
 });//app.get
 
 app.post('/data/join', function(req, res){
@@ -115,6 +100,7 @@ app.get('/data/userActivities', function(req, res){
   Activity.findAll({
     where: {
       ownerIdUserId : req.query.userID,
+      active: true
     }
   }).then(function(ownedActivities){
     
@@ -156,11 +142,11 @@ app.post('/data/toggle', function(req, res){
   'use strict';
   Activity.find({
     where: {
-      id: req.body.activityId
+      id: req.body.activity_id
     }
   })
   .then(function(activity){
     activity.updateAttributes({active: !activity.get('active')});
   });
-  res.sendStatus(200);
+  res.redirect('/');
 });
