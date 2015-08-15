@@ -20,7 +20,6 @@ module.exports = React.createClass({
   },
 
   render: function(){
-   var that = this;
     return (
       <div className="panel callout radius">
         <div className="row">
