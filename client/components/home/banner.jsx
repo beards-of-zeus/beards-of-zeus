@@ -13,7 +13,7 @@ module.exports = React.createClass({
 
         <div className="row">
           <div className="large-12 columns show-for-small">
-            <img src="http://bit.ly/1LcTUGp" />
+            <img src="//bit.ly/1LcTUGp" />
           </div>
         </div><br/>
       </div>
