@@ -355,4 +355,5 @@ When writing any block of code that is logically subordinate to the line immedia
     var dog = 'dog';
     var cat = "cat";
     ```
-    
+
+Drawn from the wonderful Hack Reactor Javascript style guide.    

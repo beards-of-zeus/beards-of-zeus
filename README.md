@@ -8,8 +8,9 @@ and join or leave activities at the click of a button. Tagalong makes getting to
 ## Contributing
 If you'd like to help make Tagalong awesome, take a look at our style guide and contribution
 guidlines.
-[Style Guide](_STYLE_GUIDE.md)
-[Contributing Guidelines](_CONTRIBUTING.md)
+
+* [Style Guide](_STYLE-GUIDE.md)
+* [Contributing Guidelines](_CONTRIBUTING.md)
 
 ## Local Testing Instructions
 * Start mysql and create the Olympus database
