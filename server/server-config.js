@@ -63,7 +63,7 @@ app.get('/data/activities', function(req, res){
       res.send(results);
   });
 
-});//app.get
+});
 
 app.post('/data/join', function(req, res){
   'use strict';
@@ -88,16 +88,12 @@ app.post('/data/leave', function(req, res){
     });
   res.redirect('/');
 });
-//tell the difference between owner vs. just belonging to activity;
-//also show activity if owner in side-bar
-
-
-
 
 app.get('/data/userActivities', function(req, res){
   'use strict';
   Activity.findAll({
     where: {
+      //diferentiate between owner and just belonging to activity
       ownerIdUserId : req.query.userID,
       active: true
     }
@@ -105,7 +101,7 @@ app.get('/data/userActivities', function(req, res){
     
     res.send(ownedActivities);
   });
-});//app.get
+});
 
 app.get('/data/participatingActivities', function(req, res){
   'use strict';
@@ -123,7 +119,7 @@ app.get('/data/participatingActivities', function(req, res){
       res.send(activities);
     });
   });
-});//app.get
+});
 
 app.get('/data/closedActivities', function(req, res){
    'use strict';
@@ -135,7 +131,7 @@ app.get('/data/closedActivities', function(req, res){
   }).then(function(ownedActivities){
     res.send(ownedActivities);
   });
-});//app.get
+});
 
 app.post('/data/toggle', function(req, res){
   'use strict';

@@ -13,6 +13,7 @@ module.exports = React.createClass({
   },
 
   getActivities: function(){
+  {/*Query db for activities NOT belonging to the user*/}
     $.getJSON('/data/activities', {userID: this.props.user_id}).done(function(activities){
        this.setState({activityList: activities});
     }.bind(this));
@@ -22,6 +23,7 @@ module.exports = React.createClass({
     var that = this;
     return (
       <div>
+      {/*Create an Activity component for each item retrieved from db*/}
         { this.state.activityList.map( function(activity) {
             return (
                 <div key={activity.id}>

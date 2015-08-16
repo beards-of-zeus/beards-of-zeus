@@ -1,4 +1,4 @@
-//For webpack, require react components here
+{/*For webpack, require react components here*/}
 var Nav = require('./nav.jsx');
 var User = require('./user.jsx');
 var Activities = require('./activities.jsx');
@@ -23,6 +23,13 @@ module.exports = React.createClass({
           </div>  
 
           <aside className="large-3 columns">
+          <div className="large-6 columns">
+            {/*load add activities here*/}
+            <Activities user_id={this.props.profile.user_id}/>
+          </div>  
+
+          <aside className="large-3 columns hide-for-small">
+            {/*toggle activity creation form*/}
             <ToggleForm user_id={this.props.profile.user_id} />
             <AdSpace />
           </aside>
@@ -33,5 +40,3 @@ module.exports = React.createClass({
     )
   }
 });
-
-// React.render(<Main />, document.getElementsByTagName('Main')[0]);

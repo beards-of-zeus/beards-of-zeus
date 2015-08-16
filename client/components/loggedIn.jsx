@@ -6,16 +6,6 @@ module.exports = React.createClass({
     $.post('/data/user', this.state.profile);
   },
 
-
-  getApi: function() {
-    //This function is useful for the eventual user profile screen. 
-    //Consider refactoring out of here when that component becomes a reality.
-    $.getJSON('/data/user')
-      .done(function(data){
-        //Data stuff
-      });
-  },
-
   getInitialState: function() {
     return {
       profile: null
@@ -28,7 +18,7 @@ module.exports = React.createClass({
         console.log("Error loading the Profile", err);
         alert("Error loading the Profile");
       }
-      //POST profile to API /user
+      {/*POST profile to API /user*/}
       this.setState({profile: profile});
     }.bind(this));
   },

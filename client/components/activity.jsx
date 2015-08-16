@@ -1,3 +1,5 @@
+{/*Activity requires several arguments to be passed in when instantiated:
+  the user's avatar and id, the event title, location, keywords, description, and id*/}
 var ToggleDescription = require('./toggleDescription.jsx');
 
 module.exports = React.createClass({
@@ -15,6 +17,7 @@ module.exports = React.createClass({
                 <button type="submit"><i className="fa fa-plus"></i></button>
               </form>             
             </div>
+            {/*Include a toggle description component and pass it the event description*/}
             <ToggleDescription description={this.props.description} />
             <div className="row activity-info">
               <p className="small-6 column location">{this.props.location}</p>
