@@ -50,7 +50,7 @@ retrieveActivityFeed: function(req, res){
       .then(function(user){
         Activity.find({where: {id: req.body.activity_id}})
         .then(function(activity){
-          globalUser.addActivity(activity);
+          user.addActivity(activity);
         });
       });
     res.redirect('/');
@@ -62,7 +62,7 @@ retrieveActivityFeed: function(req, res){
     .then(function(user){
       Activity.find({where: {id: req.body.activity_id}})
       .then(function(activity){
-        globalUser.removeActivity(activity);
+        user.removeActivity(activity);
       });
     });
     res.redirect('/');
