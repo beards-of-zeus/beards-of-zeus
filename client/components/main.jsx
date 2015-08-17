@@ -13,7 +13,7 @@ module.exports = React.createClass({
         <Nav />
        
         <div className="row">
-          <div className="large-4 columns ">
+          <div className="large-4 columns">
             <User user={this.props.profile} />
           </div>
           
