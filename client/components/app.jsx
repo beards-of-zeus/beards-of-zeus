@@ -1,3 +1,5 @@
+{/*This file checks if the user has an ID token, if the user has an id token it will 
+  trigger the login process in loggedIn.jsx, if not, the user will see the landing page*/}
 var LoggedIn = require('./loggedIn.jsx');
 var Home = require('./home.jsx');
 module.exports = React.createClass({

@@ -15,8 +15,7 @@ guidlines.
 ## Directory Structure
 Tagalong is built using React.js, Auth0, Node.js with Express and Sequelize. The most important directory is the client/components directory, which contains
 the various React components that make up the application. Webpack is used to bundle all of the component files into a single app.js file located in the public/js 
-directory. The landing page is created by home.jsx, and the application is created in main.jsx: every other file in the components directory is a part of one or more 
-of the components used on these two pages. 
+directory. boot.jsx renders the entire application to the webpage. The landing page is created by home.jsx, and the application view is created in main.jsx.
 
 Our basic server.js file is located in the root directory, while the server-config and database files are located in the server directory. 
 

@@ -14,6 +14,7 @@ module.exports = React.createClass({
   },
 
   getActivities: function(){
+  {/*Queries db for activities the user has signed up for*/}
     $.getJSON('/data/participatingActivities', {userID: this.props.user_id}).done(function(activities){
        this.setState({activityList: activities});
     }.bind(this));
@@ -26,6 +27,7 @@ module.exports = React.createClass({
         <div className="row">
           <h5 className="small-12 column"> Participating Activities </h5>
         </div>
+        {/*Render a ToggleUserActivity component for each item in activityList*/}
         { this.state.activityList.map( function(activity) {
             return (
               <div className="row" key={activity.id}>

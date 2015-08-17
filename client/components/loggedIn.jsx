@@ -1,3 +1,5 @@
+{/*This component attempts to retrieve the user's profile from the database
+  if successful it renders main.jsx using the retrieved profile*/}
 var Main = require('./main.jsx');
 var Home = require('./home.jsx');
 
