@@ -19,11 +19,6 @@ module.exports = React.createClass({
           </div>
            
           <div className="large-5 columns">
-            <Activities user_id={this.props.profile.user_id}/>
-          </div>  
-
-          <aside className="large-3 columns">
-          <div className="large-6 columns">
             {/*load add activities here*/}
             <Activities user_id={this.props.profile.user_id}/>
           </div>  
