@@ -36,7 +36,11 @@ module.exports = React.createClass({
                 <form action="/data/toggle" method="post" className="small-2 columns leave">
                   <input type='hidden' name='activity_id' value={activity.id}/>
                   <input type='hidden' name='user_id' value={that.props.user_id}/>
-                  <button type="submit"><i className="fa fa-plus"></i></button>
+                  <button type="submit">
+                    <span data-tooltip aria-haspopup="true" className="has-tip" title="Reopen this activity">
+                      <i className="fa fa-plus"></i>
+                    </span>
+                  </button>
               </form> 
               </div>
             )

@@ -21,6 +21,10 @@ p{
   right: 0;
   border: 0
 }
+.has-tip{
+ color: white; 
+ border-bottom: none
+}
 /* Thanks to Matt for the blockquote styling */
 blockquote {
   border: 0px;

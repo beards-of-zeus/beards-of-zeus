@@ -14,7 +14,11 @@ module.exports = React.createClass({
               <form className="small-1 columns join" action="/data/join" method="post">
                 <input type='hidden' name='user_id' value={this.props.user_id}/>
                 <input type='hidden' name='activity_id' value={this.props.id}/>
-                <button type="submit"><i className="fa fa-plus"></i></button>
+                <button type="submit">
+                  <span data-tooltip aria-haspopup="true" className="has-tip" title="Join this activity">
+                    <i className="fa fa-plus"></i>
+                  </span>
+                </button>
               </form>             
             </div>
             {/*Include a toggle description component and pass it the event description*/}

@@ -15,7 +15,7 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div className="small-10 columns user-activity">
-        <p className="small-6 column title" onClick={this.onClick}>{this.props.title}</p>
+        <p className="small-10 column title" onClick={this.onClick}>{this.props.title}</p>
         {this.state.showActivity ? <UserActivity avatar={this.props.avatar} owner={this.props.owner} description={this.props.description}
                   location={this.props.location} keywords={this.props.keywords}/> : null}
       </div>
