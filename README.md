@@ -22,6 +22,7 @@ Our basic server.js file is located in the root directory, while the server-conf
 Our Gruntfile uses webpack and cssmin to build our application and upload to deploy our application. 
 
 ## Local Testing Instructions
+* Run ```npm install```.
 * Start mysql and create the Olympus database
 * Preload local database by running mysql -u root < preload.dat 
 * Ensure User, Activity, UserActivity tables are created (This will occur automatically on running the server)
