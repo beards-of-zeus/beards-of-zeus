@@ -12,6 +12,16 @@ guidlines.
 * [Style Guide](_STYLE-GUIDE.md)
 * [Contributing Guidelines](_CONTRIBUTING.md)
 
+## Directory Structure
+Tagalong is built using React.js, Auth0, Node.js with Express and Sequelize. The most important directory is the client/components directory, which contains
+the various React components that make up the application. Webpack is used to bundle all of the component files into a single app.js file located in the public/js 
+directory. The landing page is created by home.jsx, and the application is created in main.jsx: every other file in the components directory is a part of one or more 
+of the components used on these two pages. 
+
+Our basic server.js file is located in the root directory, while the server-config and database files are located in the server directory. 
+
+Our Gruntfile uses webpack and cssmin to build our application and upload to deploy our application. 
+
 ## Local Testing Instructions
 * Start mysql and create the Olympus database
 * Preload local database by running mysql -u root < preload.dat 
