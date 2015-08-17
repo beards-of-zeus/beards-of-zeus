@@ -6,26 +6,6 @@ var ToggleUserActivity = require('./toggleUserActivity.jsx');
 module.exports = React.createClass({
   displayName: 'User',
 
-  componentDidMount: function(){
-    this.getActivities();
-  },
-
-  getInitialState: function(){
-    return {
-      activityList: []
-    }
-  },
-
-  getActivities: function(){
-    $.getJSON('/data/userActivities', {userID: this.props.user.user_id}).done(function(activities){
-       this.setState({activityList: activities});
-    }.bind(this));
-  },
-
-  toggle: function(activityId){
-    $.post('/data/toggle', {activityId: activityId});
-  },
-
   render: function(){
     return (
         <div className="panel radius">
