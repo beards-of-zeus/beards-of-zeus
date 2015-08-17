@@ -5,7 +5,9 @@ var ToggleUserActivity = require('./toggleUserActivity.jsx');
 
 module.exports = React.createClass({
   displayName: 'User',
-
+  logOut: function () {
+    localStorage.removeItem('userToken');
+  },
   render: function(){
     return (
         <div className="panel radius">
@@ -15,6 +17,7 @@ module.exports = React.createClass({
               <OwnedActivities user_id={this.props.user.user_id}/> 
               <ParticipatingActivities user_id={this.props.user.user_id}/>
               <ClosedActivities user_id={this.props.user.user_id}/>
+              <a href='/' onClick={this.logOut} className="button tiny radius">Log Out</a>
             </div>
           </div>
       )
