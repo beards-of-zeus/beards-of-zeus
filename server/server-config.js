@@ -58,7 +58,7 @@ app.get('/data/activities', function(req, res){
     "(select picture from Users user where userId = activity.ownerIdUserId) " +
     "as avatar, (select name from Users user where userId = " +
     "activity.ownerIdUserId) as owner from Activities activity " +
-    "where ownerIdUserId != '" + req.query.userID + "'",
+    "where ownerIdUserId != '" + req.query.userID + "' and active = true",
     { type: sequelize.QueryTypes.SELECT}).then(function(results){
       res.send(results);
   });

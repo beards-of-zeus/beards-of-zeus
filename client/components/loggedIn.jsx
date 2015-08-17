@@ -17,7 +17,7 @@ module.exports = React.createClass({
       if (err) {
         console.log("Error loading the Profile", err);
         localStorage.removeItem('userToken');
-        window.location = window.location.hostname;
+        // window.location = window.location.hostname;
       }
       {/*POST profile to API /user*/}
       this.setState({profile: profile});
