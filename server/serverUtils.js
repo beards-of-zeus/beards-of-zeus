@@ -1,5 +1,6 @@
 //require sequelize models
 var models = require('./db/orm-model.js');
+var models = models();
 var User = models.User;
 var Activity = models.Activity;
 var sequelize = require('./db/database.js');
@@ -11,6 +12,7 @@ var setUser = function(userId){
     globalUser = user; 
   });
 };
+
 module.exports = {
   upsertUser : function(req, res) {
    'use strict';
@@ -49,8 +51,8 @@ retrieveActivityFeed: function(req, res){
     "where ownerIdUserId != '" + userID + "' and active = true",
     { type: sequelize.QueryTypes.SELECT}).then(function(results){
       res.send(results);
+  });
 },
-
   joinActivity : function(req, res){
     'use strict';
     Activity.find({where: {id: req.body.activity_id}})
