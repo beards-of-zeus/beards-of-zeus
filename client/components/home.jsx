@@ -1,4 +1,3 @@
-// var Nav = require('./home/nav.jsx');
 var Banner = require('./home/banner.jsx');
 var TestimonialGroup = require('./home/testimonialgroup.jsx');
 var Footer = require('./footer.jsx');

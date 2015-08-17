@@ -5,6 +5,7 @@ module.exports = React.createClass({
         <div>
           <h3>Create Your Activity</h3>
           <form action="/data/activities" method="post">
+            {/*Use hidden input to attach user_id to the new event*/}
             <input type='hidden' name='user_id' value={this.props.user_id}/>
             <label>Title: </label><input type="text" name="title" ref="title"/>
             <label>Description: </label><textarea name="description" ref="description"></textarea>
