@@ -1,20 +1,20 @@
 var express = require('express');
 var sequelize = require('./db/database.js');
+var bodyParser = require('body-parser');
+var models = require('./db/orm-model.js');
+
 var app = express();
 
 app.set('view engine', 'html');
 app.use('/', express.static('./public'));
 
-var bodyParser = require('body-parser');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-module.exports = app;
 
 //require sequelize models
-var models = require('./db/orm-model.js');
 var models = models();
 var User = models.User;
 var Activity = models.Activity;
@@ -25,7 +25,7 @@ app.post('/data/user', function(req, res) {
   User.upsert({
     userId: req.body.user_id,
     email: req.body.email,
-    picture: req.body.picture,
+    picture: req.body.picture || req.body.gravatar,
     name: req.body.name,
     nickname:req.body.nickname});
   res.sendStatus(200);
@@ -54,11 +54,11 @@ app.get('/data/activities', function(req, res){
   'use strict';
 
   //query for all activities for which the user is NOT an owner
-  sequelize.query("select id, description, title, keywords, location, " + 
-    "(select picture from Users user where userId = activity.ownerIdUserId) " + 
-     "as avatar, (select name from Users user where userId = " +
-      "activity.ownerIdUserId) as owner from Activities activity " + 
-    "where ownerIdUserId != '" + req.query.userID + "' and active = true", 
+  sequelize.query("select id, description, title, keywords, location, " +
+    "(select picture from Users user where userId = activity.ownerIdUserId) " +
+    "as avatar, (select name from Users user where userId = " +
+    "activity.ownerIdUserId) as owner from Activities activity " +
+    "where ownerIdUserId != '" + req.query.userID + "' and active = true",
     { type: sequelize.QueryTypes.SELECT}).then(function(results){
       res.send(results);
   });
@@ -145,3 +145,5 @@ app.post('/data/toggle', function(req, res){
   });
   res.redirect('/');
 });
+
+module.exports = app;
