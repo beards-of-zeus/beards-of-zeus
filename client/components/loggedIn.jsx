@@ -1,4 +1,6 @@
 var Main = require('./main.jsx');
+var Home = require('./home.jsx');
+
 module.exports = React.createClass({
   displayName : 'LoggedIn',
 
@@ -11,27 +13,31 @@ module.exports = React.createClass({
       profile: null
     }
   },
-
-  componentDidMount: function() {
-    this.props.lock.getProfile(this.props.idToken, function (err, profile) {
-      if (err) {
-        console.log("Error loading the Profile", err);
-        localStorage.removeItem('userToken');
-        // window.location = window.location.hostname;
-      }
-      {/*POST profile to API /user*/}
-      this.setState({profile: profile});
-    }.bind(this));
+  removeToken: function(){
+    localStorage.removeItem('userToken');
+    this.setState({profile: null});
   },
-
+  componentDidMount: function() {
+    //Run this in a try catch block in case the token gets altered to the point that Auth0 hard errors and throws an exception
+    try {
+      this.props.lock.getProfile(this.props.idToken, function (err, profile) {
+        if (err) {
+          this.removeToken();
+          return;
+        }
+        this.setState({profile: profile});
+      }.bind(this));
+    } catch(e) {
+      this.removeToken();
+    }
+  },
+  //If we have a proper profile, load Main. Else, redirect back to Home.
   render: function() {
     if (this.state.profile) {
       this.postApi();
       return ( <Main profile={this.state.profile} /> );
     } else {
-      return (
-        <div className="logged-in-box auth0-box logged-in">
-        </div>);
+      return ( <Home lock={this.props.lock} /> );
     }
   }
 });
