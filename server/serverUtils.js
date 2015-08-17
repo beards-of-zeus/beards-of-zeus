@@ -5,18 +5,9 @@ var User = models.User;
 var Activity = models.Activity;
 var sequelize = require('./db/database.js');
 
-var userID, globalUser;
-var setUser = function(userId){
-  userID = userId;
-  User.find({where : {userId: userID}}).then(function(user){
-    globalUser = user; 
-  });
-};
-
 module.exports = {
   upsertUser : function(req, res) {
    'use strict';
-    setUser(req.body.user_id);
     User.upsert({
       userId: req.body.user_id,
       email: req.body.email,
@@ -48,25 +39,31 @@ retrieveActivityFeed: function(req, res){
     "(select picture from Users user where userId = activity.ownerIdUserId) " +
     "as avatar, (select name from Users user where userId = " +
     "activity.ownerIdUserId) as owner from Activities activity " +
-    "where ownerIdUserId != '" + userID + "' and active = true",
+    "where ownerIdUserId != '" + req.query.user_id + "' and active = true",
     { type: sequelize.QueryTypes.SELECT}).then(function(results){
       res.send(results);
   });
 },
   joinActivity : function(req, res){
     'use strict';
-    Activity.find({where: {id: req.body.activity_id}})
-    .then(function(activity){
-      globalUser.addActivity(activity);
-    });
+    User.find({where : {userId: req.body.user_id}})
+      .then(function(user){
+        Activity.find({where: {id: req.body.activity_id}})
+        .then(function(activity){
+          globalUser.addActivity(activity);
+        });
+      });
     res.redirect('/');
   },
 
   leaveActivity:  function(req, res){
     'use strict';
-    Activity.find({where: {id: req.body.activity_id}})
-    .then(function(activity){
-      globalUser.removeActivity(activity);
+    User.find({where: {userId: req.body.user_id}})
+    .then(function(user){
+      Activity.find({where: {id: req.body.activity_id}})
+      .then(function(activity){
+        globalUser.removeActivity(activity);
+      });
     });
     res.redirect('/');
   },
@@ -76,7 +73,7 @@ retrieveActivityFeed: function(req, res){
     Activity.findAll({
       where: {
         //diferentiate between owner and just belonging to activity
-        ownerIdUserId : userID,
+        ownerIdUserId : req.query.user_id,
         active: true
       }
     }).then(function(ownedActivities){
@@ -86,13 +83,19 @@ retrieveActivityFeed: function(req, res){
 
   participatingActivities : function(req, res){
     'use strict';
-    globalUser.getActivities({
+    User.find({
       where : {
-        active : true
-      }
-    })
-    .then(function(activities){
-      res.send(activities);
+          userId: req.query.user_id
+        }
+      }).then(function(user){
+        user.getActivities({
+          where : {
+            active : true
+          }
+      })
+      .then(function(activities){
+        res.send(activities);
+      });
     });
   },
 
