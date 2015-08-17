@@ -15,7 +15,7 @@ module.exports = React.createClass({
 
   getActivities: function(){
   {/*Queries db for activities the user created*/}
-    $.getJSON('/data/userActivities', {userID: this.props.user_id}).done(function(activities){
+    $.getJSON('/data/userActivities', {user_id: this.props.user_id}).done(function(activities){
        this.setState({activityList: activities});
     }.bind(this));
   },

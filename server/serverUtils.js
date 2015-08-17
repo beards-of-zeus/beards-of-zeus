@@ -41,7 +41,6 @@ retrieveActivityFeed: function(req, res){
     "where ownerIdUserId != '" + userID + "' and active = true",
     { type: sequelize.QueryTypes.SELECT}).then(function(results){
       res.send(results);
-
 },
 
 joinActivity : function(req, res){
@@ -73,7 +72,7 @@ ownerActivities : function(req, res){
   Activity.findAll({
     where: {
       //diferentiate between owner and just belonging to activity
-      ownerIdUserId : req.query.userID,
+      ownerIdUserId : req.query.user_id,
       active: true
     }
   }).then(function(ownedActivities){
@@ -86,7 +85,7 @@ participatingActivities : function(req, res){
   'use strict';
   User.find({
     where: { 
-      userId: req.query.userID
+      userId: req.query.user_id
     }
   }).then(function(user){
     user.getActivities({
@@ -104,7 +103,7 @@ closedActivities : function(req, res){
    'use strict';
   Activity.findAll({
     where: {
-      ownerIdUserId : req.query.userID,
+      ownerIdUserId : req.query.user_id,
       active : false
     }
   }).then(function(ownedActivities){
@@ -124,6 +123,4 @@ closedActivities : function(req, res){
   });
   res.redirect('/');
 }
-
-
 }
