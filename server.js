@@ -12,18 +12,11 @@ app.use(bodyParser.json());
 app.set('port', process.env.PORT || 4568);
 app.listen(app.get('port'));
 
-//will replace this with db
-var storage = {};
-
 app.post('/', function(req, res) {
-    console.log('[req.body] :', req.body);   // [req.body] : undefined
-
-    storage[req.body.user_id] = req.body;
-    res.sendStatus(200);
+  res.sendStatus(200);
 });
 
 app.get('/', function(req, res){
-  console.log(storage);
   res.sendStatus(200);
 });
 console.log('Server listening on port ', app.get('port'));
